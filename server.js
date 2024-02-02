@@ -3,7 +3,7 @@ let myMap = {}
 const server = net.createServer(conn => {
     console.log("Client Connected...");
     const clientAddress = conn.address().address;
-    console.log("client Ip:",remoteAddress)
+    console.log("client Ip:",clientAddress)
 
     conn.on('data', data => {
         // Handle incoming data
@@ -12,14 +12,14 @@ const server = net.createServer(conn => {
         let i = 0;
         while (i < dataString.length) {
             let key, value;
-            if (dataString[i] == "put") {
+            if (dataString[i] === "PUT") {
                 key = dataString[i + 1];
                 value = dataString[i + 2];
                 myMap[clientAddress][key]=value;
                 i += 3;
                 continue;
             }
-            if (dataString[i] == "get") {
+            if (dataString[i] === "GET") {
                 key = dataString[i + 1];
                 value = myMap[clientAddress][key];
                 i += 2;

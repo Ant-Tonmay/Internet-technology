@@ -9,7 +9,7 @@ int main(int argc , char* argv[])
         return 1;
     }
 
-    string request = "curl ";
+    string request = "node client.js ";
 
     for(int i = 1 ; i<argc;i++){
         request=request+argv[i]+' ';

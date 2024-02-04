@@ -2,7 +2,7 @@ const { log } = require('console');
 const net = require('net');
 
 const serverIP = process.argv[2] || '127.0.0.1'; 
-const serverPort = parseInt(process.argv[3]) || 3000;
+const serverPort = parseInt(process.argv[3]) || 9000;
 
 console.log(serverIP)
 console.log(serverPort)

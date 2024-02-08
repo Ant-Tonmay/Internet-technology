@@ -20,6 +20,6 @@ app.use('/',homepage);
 app.use(express.static(path.join(__dirname, 'uploads')))
 app.listen(PORT,()=>{
     console.log(`Server is Running at ${PORT}`)
-    console.log("http://localhost:3000")
+    console.log("http://192.168.0.185:3000")
 })
 

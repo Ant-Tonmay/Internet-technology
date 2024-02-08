@@ -6,8 +6,7 @@ function myPromise() {}
 
 router.get("/", async (req, res) => {
 
-  const filePath =
-    "/home/ant/Documents/Internet-Tech/Assignment2/data-history.json";
+  const filePath = "/home/joy/Documents/ws/asg/Internet-technology/Assignment2/data-history.json";
   let obj;
 
   try {

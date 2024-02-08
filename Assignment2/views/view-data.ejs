@@ -145,7 +145,7 @@
     <div class="content-wrapper">
       <% content.forEach(item => { %>
       <div class="content-view">
-        <% if (item.endsWith('g')) { %>
+        <% if (item.endsWith('g') || item.endsWith('G')) { %>
         <!-- Download link for image -->
         <a class="download" href="<%= '/' + item %>" download="image.jpg">
           <button>Download</button>
@@ -154,7 +154,6 @@
         <img src="<%= '/' + item %>" alt="" />
         <% } else { %>
         <!-- Display text content -->
-        <div class="content-view">
           <div class="content-view-text">
             <span>
 
@@ -170,8 +169,6 @@
               <button>Download</button>
             </a>
           </div>
-        </div>
-
         <% } %>
       </div>
       <% }) %>

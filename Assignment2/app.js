@@ -8,7 +8,10 @@ let PORT = 3000
 app.set('view engine','ejs');
 
 
+app.use(express.json({ limit: '50mb' })); // Adjust the limit as needed
 
+// Middleware to handle URL-encoded data with size limit
+app.use(express.urlencoded({ extended: true, limit: '50mb' })); // Adjust the limit as needed
 
 //Import Routes
 const homepage = require('./routes/home-page')
@@ -20,6 +23,6 @@ app.use('/',homepage);
 app.use(express.static(path.join(__dirname, 'uploads')))
 app.listen(PORT,()=>{
     console.log(`Server is Running at ${PORT}`)
-    console.log("http://192.168.0.185:3000")
+    console.log("http://192.168.0.102:3000")
 })
 

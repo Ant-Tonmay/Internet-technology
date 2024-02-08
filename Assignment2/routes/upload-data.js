@@ -8,9 +8,10 @@ const storage = multer.diskStorage({
     return cb(null, "./uploads");
   },
   filename: function (req, file, cb) {
-    const filePath = "/home/ant/Documents/Internet-Tech/Assignment2/data-history.json";
+    const filePath = "/home/joy/Documents/ws/asg/Internet-technology/Assignment2/data-history.json";
     var obj;
     const fname = `${Date.now()}-${file.originalname}` ;
+    console.log(fname)
     fs.readFile(filePath, "utf8", function (err, data) {
       if (err) throw err;
       obj = JSON.parse(data);
@@ -19,6 +20,8 @@ const storage = multer.diskStorage({
       fs.writeFile(filePath,JSON.stringify(obj),'utf-8',(err)=>{
         if(err){
           console.log(err)
+        } else {
+          console.log("file saved!!")
         }
       })
     });
@@ -35,6 +38,7 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", upload.single("fileInput"), async (req, res) => {
+  console.log("upload success")
   res.render('sucess-page')
   //res.send("sucess")
 });

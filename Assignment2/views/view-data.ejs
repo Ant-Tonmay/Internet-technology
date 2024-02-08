@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .content-view{
+            height: 300px;
+            width: 500px;
+        }
+        .content-view img{
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Content</title>
+</head>
+<body>
+    <h1>Content:</h1>
+    <script>
+        function downloadAll()
+        {
+            document.querySelectorAll('.download').forEach(d=>d.click())
+        }
+    </script>
+
+    <div class="download-all">
+        <button onclick="downloadAll()">Download All</button>
+    </div>
+    
+  <div>
+   <% content.forEach(item => { %>
+    <div>
+        <div class="content-view">
+            <% if (item[item.length-1] === 'g') { %>
+                <a class="download" href="<%= 'http://192.168.0.185:3000/' + item %>" download="image.jpg" >
+                    <button>
+                        download
+                    </button>
+                </a>
+
+                <img src="<%= 'http://192.168.0.185:3000/' + item %>" alt="">
+            <% } else { %>
+                <a class="download" href="<%= 'http://192.168.0.185:3000/' + item %>" download="file.txt" >
+                    <button>
+                        download
+                    </button>
+                </a>
+
+            <%}%>
+        </div>
+    </div>
+    <% }); %>
+
+  </div>
+        
+</body>
+</html> 
+

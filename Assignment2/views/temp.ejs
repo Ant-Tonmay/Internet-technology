@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .content-view {
+            height: 300px;
+            width: 500px;
+        }
+
+        .content-view img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Content</title>
+</head>
+<body>
+    <h1>Content:</h1>
+
+    <script>
+        // JavaScript function to trigger the download of all items
+        function downloadAll() {
+            document.querySelectorAll('.download').forEach(d => d.click());
+        }
+    </script>
+
+    <div class="download-all">
+        <!-- Button to trigger the download of all items -->
+        <button onclick="downloadAll()">Download All</button>
+    </div>
+
+    <div>
+        <% content.forEach(item => { %>
+            <div>
+                <div class="content-view">
+                    <% if (item.endsWith('g')) { %>
+                        <!-- Download link for image -->
+                        <a class="download" href="<%= 'http://192.168.0.185:3000/' + item %>" download="image.jpg">
+                            <button>
+                                Download
+                            </button>
+                        </a>
+                        <!-- Display the image -->
+                        <img src="<%= 'http://192.168.0.185:3000/' + item %>" alt="">
+                    <% } else { %>
+                        <!-- Display text content -->
+                        <%= item %>
+                        <br>
+                        <!-- Download link for text file -->
+                        <a class="download" href="<%= 'http://192.168.0.185:3000/' + item %>" download="file.txt">
+                            <button>
+                                Download
+                            </button>
+                        </a>
+                    <% } %>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</body>
+</html>

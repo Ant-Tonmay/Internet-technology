@@ -2,58 +2,177 @@
 <html lang="en">
   <head>
     <style>
-      .content-view {
-        height: 300px;
-        width: 500px;
-      }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      .content-view img {
-        height: 100%;
-        width: 100%;
-        object-fit: contain;
-      }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+             align-items: center; 
+            /* justify-content: center; */
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .download-all {
+            margin-top: 10px;
+        }
+
+        .download-all button {
+            background-color: #04aa6d;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .download-all button:hover {
+            background-color: #037e54;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .content-view {
+            position: relative;
+            height: 300px;
+            width: 300px;
+            margin: 20px;
+            border-radius: 8px;
+             /* overflow: hidden;  */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out; 
+        }
+
+        .content-view:hover {
+            transform: scale(1.05);
+        }
+
+        .content-view img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .content-view-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.8));
+            text-align: center;
+        }
+
+        .content-view-text span {
+            color: #333;
+            font-size: 18px;
+        }
+
+        .download {
+            visibility: hidden;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .content-view:hover .download {
+            visibility: visible;
+        }
+
+        .download button {
+            padding: 10px 20px;
+            border: none;
+            outline: none;
+            color: #fff;
+            background: linear-gradient(to right, #ff5f6d, #ffc371);
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .download button:hover {
+            background: linear-gradient(to right, #ff9966, #ff5e62);
+        }
     </style>
+    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Display Content</title>
   </head>
   <body>
-    <h1>Content:</h1>
+    <header>
+      <h1>Content:</h1>
+      <div class="download-all">
+        <button onclick="downloadAll()">Download All</button>
+      </div>
+    </header>
 
-    <div class="download-all">
-      <!-- Button to trigger the download of all items -->
-      <button onclick="downloadAll()">Download All</button>
-    </div>
-
-    <div>
+    <div class="content-wrapper">
       <% content.forEach(item => { %>
-      <div>
+      <div class="content-view">
+        <% if (item.endsWith('g')) { %>
+        <!-- Download link for image -->
+        <a class="download" href="<%= '/' + item %>" download="image.jpg">
+          <button>Download</button>
+        </a>
+        <!-- Display the image -->
+        <img src="<%= '/' + item %>" alt="" />
+        <% } else { %>
+        <!-- Display text content -->
         <div class="content-view">
-          <% if (item.endsWith('g')) { %>
-          <!-- Download link for image -->
-          <a
-            class="download"
-            href="<%= '/' + item %>"
-            download="image.jpg"
-          >
-            <button>Download</button>
-          </a>
-          <!-- Display the image -->
-          <img src="<%= '/' + item %>" alt="" />
-          <% } else { %>
-          <!-- Display text content -->
-          <%= item %>
-          <br />
-          <!-- Download link for text file -->
-          <a
-            class="download"
-            href="<%= '/' + item %>"
-            download="textFile.jpg"
-          >
-            <button>Download</button>
-          </a>
-          <% } %>
+          <div class="content-view-text">
+            <span>
+
+                <embed type="text/html" src="<%= '/' + item %>">
+
+             </span>
+            <!-- Download link for text file -->
+            <a
+              class="download"
+              href="<%= '/' + item %>"
+              download="textFile.jpg"
+            >
+              <button>Download</button>
+            </a>
+          </div>
         </div>
+
+        <% } %>
       </div>
       <% }) %>
     </div>

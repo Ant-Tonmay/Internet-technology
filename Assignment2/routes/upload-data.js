@@ -35,7 +35,8 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", upload.single("fileInput"), async (req, res) => {
-  res.send("Uploaded Succesfully!!");
+  res.render('sucess-page')
+  //res.send("sucess")
 });
 
 module.exports = router;

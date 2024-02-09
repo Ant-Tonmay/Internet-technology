@@ -2,7 +2,7 @@ const net = require('net');
 let myMap = null
 const server = net.createServer(conn => {
     console.log("Client Connected...");
-    const clientAddress = conn.address().address;
+    const clientAddress = conn.remoteAddress;
     console.log("client Ip:",clientAddress)
 
     conn.on('data', data => {

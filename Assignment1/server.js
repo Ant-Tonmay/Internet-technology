@@ -10,9 +10,11 @@ const server = net.createServer(conn => {
         let dataString = data.toString().trim().split(' ');
         console.log(dataString);
         let i = 0;
+        let flag=0
         while (i < dataString.length) {
             let key, value;
             if (dataString[i] === "put") {
+                flag =1
                 key = dataString[i + 1];
                 value = dataString[i + 2];
                 if(myMap === null) {
@@ -21,7 +23,7 @@ const server = net.createServer(conn => {
                 }
                 myMap[clientAddress][key]=value;
                 i += 3;
-                conn.write("Data saved successfully");
+                conn.write("Data saved successfully\n");
                 
             }
             if (dataString[i] === "get") {
@@ -38,7 +40,8 @@ const server = net.createServer(conn => {
                 console.log(myMap[clientAddress][key]);
                 value = myMap[clientAddress][key];
                 i += 2;
-                conn.write(value);
+                conn.write(`Fecthed Data:${value}  `)
+                //conn.write(value);
                 
             }
         }
